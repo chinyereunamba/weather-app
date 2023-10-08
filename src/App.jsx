@@ -1,13 +1,18 @@
-import React from 'react'
-import './App.css'
+import React from "react"
+import "./App.css"
+import Nav from "./components/Nav"
+import Weather from "./components/Weather"
 
 function App() {
-  return (
-    <div className='App'>
-      <h1>Hello there!</h1>
-      <h2>My name is Chinyere</h2>
-    </div>
-  )
+    return (
+        <>
+            <Nav />
+            <div className="App">
+                <h1>Good evening, Chinyere</h1>
+                <Weather />
+            </div>
+        </>
+    )
 }
 
 export default App
