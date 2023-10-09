@@ -3,6 +3,10 @@ import "./App.css"
 import Nav from "./components/Nav"
 import Weather from "./components/Weather"
 import moment from "moment/moment"
+import Login from "./components/Login"
+
+import { useAuthState } from "react-firebase-hooks/auth"
+import { auth } from "./firebase"
 
 function App() {
     const backgroundImg = {
@@ -11,31 +15,47 @@ function App() {
         sunset: "https://images.unsplash.com/photo-1542159919831-40fb0656b45a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
         clearSky:
             "https://images.unsplash.com/photo-1531147646552-1eec68116469?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-        night: "https://images.unsplash.com/photo-1488866022504-f2584929ca5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2062&q=80",
+        night: "https://images.unsplash.com/photo-1581886573745-4487c55d95f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1977&q=80",
     }
-
-
     const date = moment().format("DD")
-    const month = moment().format('MMM')
-    const day = moment().format('ddd')
+    const month = moment().format("MMM")
+    const day = moment().format("ddd")
 
-    const hour = moment().format('H')
+    const hour = moment().format("H")
 
-    const timeOfDay = hour > 12 ? "afternoon" : hour > 16 ? "evening" : "morning"
+    const timeOfDay =
+        hour >= 12 && hour < 16
+            ? "afternoon"
+            : hour > 16
+            ? "evening"
+            : "morning"
 
-    return (
+    const background =
+        timeOfDay == "afternoon"
+            ? backgroundImg.clearSky
+            : hour >= 18 && hour <= 20
+            ? backgroundImg.sunset
+            : hour > 20 || hour <= 5
+            ? backgroundImg.night
+            : backgroundImg.sunrise
+
+    const [user] = useAuthState(auth)
+
+    return user ? (
         <section
             style={{
-                background: `url('${backgroundImg.sunrise}') #00000052 no-repeat center`,
+                background: `url('${background}') #00000052 no-repeat center`,
                 backgroundBlendMode: "darken",
             }}
         >
-            <Nav />
+            <Nav profile={user.photoURL}/>
             <div className="App">
-                <h1 className="greeting">Good {timeOfDay}, Chinyere</h1>
-                <Weather month={month} date={date} day={day}/>
+                <h1 className="greeting">Good {timeOfDay}, { user.displayName }</h1>
+                <Weather month={month} date={date} day={day} />
             </div>
         </section>
+    ) : (
+        <Login />
     )
 }
 

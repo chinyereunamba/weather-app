@@ -88,3 +88,19 @@
     color: white;
     text-transform: capitalize;
 }
+
+.login{
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(134deg, #3042a2, #4f2e89);
+}
+
+.login button{
+    padding: 0.7rem 1.5rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
