@@ -5,9 +5,11 @@ function Nav() {
     return (
         <div className="nav">
             <div className="profile">
-                <img src={profile} alt="profile-pic" />
+                <div className="profile-img">
+                    <img src={profile} alt="profile-pic" />
+                </div>
+                <button>Logout</button>
             </div>
-            <button>Logout</button>
         </div>
     )
 }

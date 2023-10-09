@@ -1,38 +1,90 @@
+#root > section {
+    min-height: 100vh;
+    
+}
 .App {
     padding: 0.5rem 1rem;
+}
+
+.App .greeting {
+    padding-inline: 1rem;
+    color: white;
 }
 
 #weather {
     display: flex;
     flex-direction: column;
     padding: 0.5rem 1rem;
-    border: 1px solid;
     gap: 1rem;
+    margin-top: 1rem;
 }
 
 #weather .today {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-block: 0.5rem 1.5rem;
+    color: white;
+}
+
+.today h3{
+    font-weight: 400;
+    font-size: 1.05rem;
+}
+
+.today h1{
+    font-weight: 500;
 }
 
 #weather .weather-info {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
     gap: 1rem;
+    width: fit-content;
 }
 
 .weather-info .weather-daily {
-    max-width: 200px;
-    width: 100%;
-    height: 220px;
-    padding: 1rem;
-    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 200px !important;
+    min-height: 270px;
+    padding: 0.7rem 1rem;
     background: rgba(255, 255, 255, 0.19);
     border-radius: 10px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(7.4px);
-    -webkit-backdrop-filter: blur(7.4px);
-    border: 1px solid rgba(255, 255, 255, 0.17)
+    backdrop-filter: blur(9.3px);
+    -webkit-backdrop-filter: blur(9.3px);
+    border: 1px solid rgba(255, 255, 255, 0.17);
+}
+
+.weather-daily .weather-img{
+    width: 100px;
+    margin-top: 1rem;
+}
+
+.weather-img img{
+    width: 100%;
+}
+
+.weather-daily .temp{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    width: 100%;
+}
+
+.temp p{
+    font-size: 1.2rem;
+    color: white;
+    font-weight: 600;
+}
+
+.weather-daily .feels-like{
+    padding-top: 0.5rem;
+    font-size: 1.2rem;
+    color: white;
+    text-transform: capitalize;
 }
