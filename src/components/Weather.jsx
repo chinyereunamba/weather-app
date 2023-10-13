@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import WeatherInfo from "./WeatherInfo"
+import moment, { weekdaysShort } from "moment/moment"
 
 function Weather({ day, date, month }) {
     const [weatherInfo, setWeatherInfo] = useState({})
@@ -16,14 +17,6 @@ function Weather({ day, date, month }) {
         setLongitude(position.coords.longitude)
         setLatitude(position.coords.latitude)
     })
-
-    // const weatherInfo = [
-    //     { day: "Sunday", high: 25, low: 23, feelsLike: "rainy" },
-    //     { day: "Monday", high: 27, low: 25, feelsLike: "sunny" },
-    //     { day: "Tuesday", high: 27, low: 25, feelsLike: "rainy" },
-    //     { day: "Wednesday", high: 27, low: 25, feelsLike: "rainy" },
-    //     { day: "Thursday", high: 27, low: 25, feelsLike: "rainy" },
-    // ]
 
     async function callWeather() {
         try {
@@ -71,8 +64,8 @@ function Weather({ day, date, month }) {
         "01n": "/icons/clear-sky.png",
         "02d": "/icons/few-cloud.png",
         "02n": "/icons/few-cloud.png",
-        "03d": "/icons/could.png",
-        "03n": "/icons/could.png",
+        "03d": "/icons/cloud.png",
+        "03n": "/icons/cloud.png",
         "04d": "/icons/scattered-clouds.png",
         "04n": "/icons/scattered-clouds.png",
         "09d": "/icons/shower.png",
@@ -86,9 +79,23 @@ function Weather({ day, date, month }) {
         "50d": "/icons/fog.png",
         "50n": "/icons/fog.png",
     }
-    
-    console.log(currentForecast)
-    const feelsLike = (Number(currentWeather.feels_like) - 273).toFixed(1)
+
+    const ISOString = (utc) => {
+        const date = new Date(utc)
+        const hours = date.getHours()
+        const day = date.getDay()
+        const shortDay = weekdaysShort()[day]
+        const time = String(hours).length == 1 ? `0${hours}:00` : `${hours}:00`
+        return (
+            <div className="time">
+            <h3>{shortDay}</h3>
+            <h3>{time}</h3>
+            </div>
+        )
+    }
+
+    const feelsLike = Number(currentWeather.feels_like - 273).toFixed(1)
+
     return (
         <section id="weather">
             <div className="today">
@@ -121,7 +128,7 @@ function Weather({ day, date, month }) {
                 {currentForecast.map((info, index) => (
                     <WeatherInfo
                         key={index}
-                        // day={info.day}
+                        day={ISOString(info.dt_txt)}
                         temp={Number(info.main.temp_min - 273).toFixed(1)}
                         high={Number(info.main.temp_min - 273).toFixed(1)}
                         img={weatherIcons[info.weather[0].icon]}

@@ -19,7 +19,7 @@ function App() {
     }
     const date = moment().format("DD")
     const month = moment().format("MMM")
-    const day = moment().format("ddd")
+    const day = moment().format("dddd")
 
     const hour = moment().format("H")
 

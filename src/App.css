@@ -1,3 +1,6 @@
+#root{
+    overflow: hidden;
+}
 #root > section {
     min-height: 100vh;
     
@@ -58,8 +61,6 @@
 
 .weather-info .weather-daily {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
     width: 200px !important;
     min-height: 270px;
@@ -72,6 +73,11 @@
     border: 1px solid rgba(255, 255, 255, 0.17);
 }
 
+.weather-daily .time{
+    display: flex;
+    justify-content: space-between;
+}
+
 .weather-daily .weather-img{
     width: 100px;
     margin-top: 1rem;
@@ -82,17 +88,14 @@
 }
 
 .weather-daily .temp{
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-top: 0.5rem;
-    width: 100%;
+    margin-block: 0.5rem;
 }
 
-.temp p{
-    font-size: 1.2rem;
+.temp h1{
+    font-size: 2rem;
     color: white;
-    font-weight: 600;
+    font-weight: 300;
 }
 
 .weather-daily .feels-like{
