@@ -27,9 +27,20 @@
     color: white;
 }
 
-.today h3{
-    font-weight: 400;
+.today .temp{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.today .temp p{
     font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.temp b{
+    font-size: 4rem;
+    font-weight: 300;
 }
 
 .today h1{
@@ -41,6 +52,7 @@
     align-items: center;
     gap: 1rem;
     width: fit-content;
+    margin-inline: auto;
 }
 
 .weather-info .weather-daily {
@@ -87,6 +99,31 @@
     font-size: 1.2rem;
     color: white;
     text-transform: capitalize;
+}
+
+.search{
+    max-width: 500px;
+    width: 100%;
+    padding-block: 0.5rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid gray;
+}
+
+.search input{
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: white;
+}
+
+.search svg{
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 300;
 }
 
 .login{

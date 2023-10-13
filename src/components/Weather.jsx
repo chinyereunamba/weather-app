@@ -1,31 +1,37 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import WeatherInfo from "./WeatherInfo"
 
-async function Weather({ day, date, month }) {
-    const [weatherInfo, setWeatherInfo] = useState([])
+function Weather({ day, date, month }) {
+    // const [weatherInfo, setWeatherInfo] = useState([])
+    const [currentWeather, setCurrentWeather] = useState({})
+    const [country, setCountry] = useState('')
 
-    const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=${
-            import.meta.env.VITE_WEATHER_API
-        }`,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-    )
-        .then((data) => {
-            data.json()
-        })
-        .then((weather) => {
-            setWeatherInfo(weather)
-        })
-        .catch((err) => {
+    const weatherInfo = [
+        { day: "Sunday", high: 25, low: 23, feelsLike: "rainy" },
+        { day: "Monday", high: 27, low: 25, feelsLike: "sunny" },
+        { day: "Tuesday", high: 27, low: 25, feelsLike: "rainy" },
+        { day: "Wednesday", high: 27, low: 25, feelsLike: "rainy" },
+        { day: "Thursday", high: 27, low: 25, feelsLike: "rainy" },
+    ]
+    
+    async function callWeather() {
+        try {
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?lat=44.34&lon=10.99&appid=${import.meta.env.VITE_WEATHER_API}`
+            )
+            const data = await response.json()
+            setCurrentWeather(data.main)
+            setCountry(data.sys.country)
+            console.log(data)
+                
+        } catch (err) {
             console.error(err)
-        })
+        }
+    }
 
-    console.log(weatherInfo)
+    useEffect(() => {
+        callWeather()
+    }, [])
 
     const weatherIcons = {
         sunny: "/icons/sun.png",
@@ -44,6 +50,10 @@ async function Weather({ day, date, month }) {
         }
     })
 
+    const feelsLike = (Number(currentWeather.feels_like) - 273).toFixed(1)
+    const city = currentWeather.name
+    const description = currentWeather.description
+
     return (
         <section id="weather">
             <div className="today">
@@ -51,10 +61,13 @@ async function Weather({ day, date, month }) {
                     <p>
                         {day}, {date} {month}
                     </p>
-                    <h1>Port Harcourt, Rivers</h1>
+                    <h1>{city}, { country }</h1>
                 </div>
-                <h3>Feels like 23&deg;</h3>
+                <div className="temp">
+                    <p>Feels like</p> <b>{ feelsLike }&deg;</b>
+                </div>
             </div>
+            <p>{ description }</p>
             <div className="weather-info">
                 {weatherInfo.map((info, index) => (
                     <WeatherInfo

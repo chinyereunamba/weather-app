@@ -26,37 +26,35 @@ function App() {
     const timeOfDay =
         hour >= 12 && hour < 16
             ? "afternoon"
-            : hour > 16
+            : hour >= 16 && hour < 23
             ? "evening"
             : "morning"
 
     const background =
         timeOfDay == "afternoon"
             ? backgroundImg.clearSky
-            : hour >= 18 && hour <= 20
+            : hour >= 18 && hour < 20
             ? backgroundImg.sunset
-            : hour > 20 || hour <= 5
+            : hour >= 20 || hour <= 5
             ? backgroundImg.night
             : backgroundImg.sunrise
 
     const [user] = useAuthState(auth)
 
-    return user ? (
+    return (
         <section
             style={{
                 background: `url('${background}') #00000052 no-repeat center`,
                 backgroundBlendMode: "darken",
             }}
         >
-            <Nav profile={user.photoURL}/>
+            <Nav />
             <div className="App">
-                <h1 className="greeting">Good {timeOfDay}, { user.displayName }</h1>
+                <h1 className="greeting">Good {timeOfDay}, Chinyere</h1>
                 <Weather month={month} date={date} day={day} />
             </div>
         </section>
-    ) : (
-        <Login />
-    )
+    ) 
 }
 
 export default App
