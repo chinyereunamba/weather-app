@@ -1,9 +1,5 @@
-#root{
-    overflow: hidden;
-}
 #root > section {
     min-height: 100vh;
-    
 }
 .App {
     padding: 0.5rem 1rem;
@@ -18,7 +14,7 @@
 #weather {
     display: flex;
     flex-direction: column;
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     gap: 1rem;
     margin-top: 1rem;
 }
@@ -27,27 +23,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block: 0.5rem 1.5rem;
+    margin-block: 0 1.5rem;
     color: white;
 }
 
-.today .temp{
+.today .temp {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-.today .temp p{
+.today .temp p {
     font-size: 1.05rem;
     font-weight: 400;
 }
 
-.temp b{
+.temp b {
     font-size: 4rem;
     font-weight: 300;
 }
 
-.today h1{
+.today h1 {
     font-weight: 500;
 }
 
@@ -57,13 +53,18 @@
     gap: 1rem;
     width: fit-content;
     margin-inline: auto;
+    overflow-x: scroll;
+    width: calc(100vw - 4rem);
+    height: fit-content;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
 }
 
 .weather-info .weather-daily {
     display: flex;
     flex-direction: column;
-    width: 200px !important;
-    min-height: 270px;
+    min-width: 220px !important;
+    height: 300px;
     padding: 0.7rem 1rem;
     background: rgba(255, 255, 255, 0.19);
     border-radius: 10px;
@@ -73,51 +74,55 @@
     border: 1px solid rgba(255, 255, 255, 0.17);
 }
 
-.weather-daily .time{
+.weather-daily .time {
     display: flex;
     justify-content: space-between;
+    color: rgb(251, 255, 0);
 }
 
-.weather-daily .weather-img{
+.time h3 {
+    font-weight: 300;
+}
+
+.weather-daily .weather-img {
     width: 100px;
     margin-top: 1rem;
 }
 
-.weather-img img{
+.weather-img img {
     width: 100%;
 }
 
-.weather-daily .temp{
+.weather-daily .temp {
     align-items: center;
     margin-block: 0.5rem;
 }
 
-.temp h1{
+.temp h1 {
     font-size: 2rem;
     color: white;
     font-weight: 300;
 }
 
-.weather-daily .feels-like{
+.weather-daily .feels-like {
     padding-top: 0.5rem;
     font-size: 1.2rem;
     color: white;
     text-transform: capitalize;
 }
 
-.nav form{
+.nav form {
     max-width: 400px;
     width: 100%;
-
 }
-.search{
+.search {
     width: 100%;
     display: flex;
     align-items: center;
     position: relative;
 }
 
-.search input{
+.search input {
     border: none;
     background: transparent;
     outline: none;
@@ -133,30 +138,35 @@
     transition: 0.3s ease;
 }
 
-.search input:focus{
+.search input:focus {
     border-bottom: 1px solid #ffffff;
 }
 
-.search input::placeholder{
+.search input::placeholder {
     color: #ffffff76;
     text-transform: capitalize;
     user-select: none;
 }
-.search svg{
-    font-size: 1.2rem;
+.search button {
     font-weight: 300;
     position: absolute;
     right: 0;
+    background: none !important;
+    border: none;
+    padding: 0 !important;
 }
 
-.login{
+.search svg{
+    font-size: 1.2rem;
+}
+.login {
     height: 100vh;
     display: grid;
     place-items: center;
     background: linear-gradient(134deg, #3042a2, #4f2e89);
 }
 
-.login button{
+.login button {
     padding: 0.7rem 1.5rem;
     border-radius: 6px;
     border: none;

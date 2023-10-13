@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import WeatherInfo from "./WeatherInfo"
 import moment, { weekdaysShort } from "moment/moment"
+import { SearchValue } from "../store"
 
 function Weather({ day, date, month }) {
-    const [weatherInfo, setWeatherInfo] = useState({})
-    const [currentWeather, setCurrentWeather] = useState({})
-    const [country, setCountry] = useState("")
-    const [city, setCity] = useState("")
-    const [description, setDescription] = useState("")
+    const { weatherInfo } = useContext(SearchValue)
+    const { setWeatherInfo } = useContext(SearchValue)
+    const { currentWeather } = useContext(SearchValue)
+    const { setCurrentWeather } = useContext(SearchValue)
+    const { country } = useContext(SearchValue)
+    const { setCountry } = useContext(SearchValue)
+    const { city } = useContext(SearchValue)
+    const { setCity } = useContext(SearchValue)
+
+    const { description } = useContext(SearchValue)
+    const { setDescription } = useContext(SearchValue)
+
     const [longitude, setLongitude] = useState(0)
     const [latitude, setLatitude] = useState(0)
 
-    let [currentForecast, setCurrentForecast] = useState([])
+    const { currentForecast } = useContext(SearchValue)
+    const { setCurrentForecast } = useContext(SearchValue)
 
     const location = navigator.geolocation.getCurrentPosition((position) => {
         setLongitude(position.coords.longitude)
@@ -88,13 +97,13 @@ function Weather({ day, date, month }) {
         const time = String(hours).length == 1 ? `0${hours}:00` : `${hours}:00`
         return (
             <div className="time">
-            <h3>{shortDay}</h3>
-            <h3>{time}</h3>
+                <h3>{shortDay}</h3>
+                <h3>{time}</h3>
             </div>
         )
     }
 
-    const feelsLike = Number(currentWeather.feels_like - 273).toFixed(1)
+    const feelsLike = (currentWeather.feels_like - 273).toFixed(1)
 
     return (
         <section id="weather">

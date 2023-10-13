@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import "./App.css"
 import Nav from "./components/Nav"
 import Weather from "./components/Weather"
 import moment from "moment/moment"
 import Login from "./components/Login"
+import { Context } from "./store"
 
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth } from "./firebase"
@@ -42,6 +43,7 @@ function App() {
     const [user] = useAuthState(auth)
 
     return (
+        <Context>
         <section
             style={{
                 background: `url('${background}') #00000052 no-repeat center`,
@@ -53,7 +55,8 @@ function App() {
                 <h1 className="greeting">Good {timeOfDay}, Chinyere</h1>
                 <Weather month={month} date={date} day={day} />
             </div>
-        </section>
+            </section>
+        </Context>
     ) 
 }
 
