@@ -9,6 +9,7 @@
 .App .greeting {
     padding-inline: 1rem;
     color: white;
+    font-weight: 400;
 }
 
 #weather {
@@ -101,13 +102,16 @@
     text-transform: capitalize;
 }
 
-.search{
-    max-width: 500px;
+.nav form{
+    max-width: 400px;
     width: 100%;
-    padding-block: 0.5rem;
+
+}
+.search{
+    width: 100%;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid gray;
+    position: relative;
 }
 
 .search input{
@@ -116,14 +120,30 @@
     outline: none;
     width: 100%;
     font-size: 1.05rem;
-    font-weight: 300;
+    font-weight: 200;
+    line-height: 1.5;
     color: white;
+    padding-block: 0.5rem 0.3rem;
+    padding-inline: 0 0.5rem;
+    border-bottom: 1px solid #ffffff52;
+    transform-origin: center;
+    transition: 0.3s ease;
 }
 
+.search input:focus{
+    border-bottom: 1px solid #ffffff;
+}
+
+.search input::placeholder{
+    color: #ffffff76;
+    text-transform: capitalize;
+    user-select: none;
+}
 .search svg{
-    color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 300;
+    position: absolute;
+    right: 0;
 }
 
 .login{

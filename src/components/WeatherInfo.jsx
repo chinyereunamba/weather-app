@@ -1,6 +1,6 @@
 import React from "react"
 
-function WeatherInfo({ day, img, high, low, feelsLike }) {
+function WeatherInfo({ day, img, temp, feelsLike }) {
     return (
         <div className="weather-daily">
             <h3>{day}</h3>
@@ -9,8 +9,7 @@ function WeatherInfo({ day, img, high, low, feelsLike }) {
             </div>
             <p className="feels-like">{feelsLike}</p>
             <div className="temp">
-                <p>{low}&deg;</p>
-                <p>{high}&deg;</p>
+                <p>{temp}&deg;</p>
             </div>
         </div>
     )
