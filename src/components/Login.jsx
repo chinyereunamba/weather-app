@@ -15,7 +15,6 @@ function Login() {
             const token = credential.accessToken
 
             console.log(user)
-
         } catch (e) {
             console.error(e)
         }

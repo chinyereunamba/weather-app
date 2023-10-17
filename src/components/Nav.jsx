@@ -1,23 +1,23 @@
 import React, { useRef, useContext, useState } from "react"
-import profile from "../assets/profile_pic.png"
 import { signOut } from "firebase/auth"
+import { auth } from "../firebase"
 import { FaMagnifyingGlass } from "react-icons/fa6"
 import { SearchValue } from "../store"
 
 function Nav() {
     const enteredCity = useRef()
     const { setWeatherInfo } = useContext(SearchValue)
-    
+
     const { setCountry } = useContext(SearchValue)
     const { setCurrentForecast } = useContext(SearchValue)
     const { setCurrentWeather } = useContext(SearchValue)
     const { setDescription } = useContext(SearchValue)
-    const {setCity} = useContext(SearchValue)
+    const { setCity } = useContext(SearchValue)
 
     async function weatherInSearch(e) {
         e.preventDefault()
         const search = enteredCity.current.value
-        
+
         try {
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=${
@@ -40,6 +40,15 @@ function Nav() {
         }
     }
 
+    const logOut = () => {
+        signOut(auth)
+            .then(() => {
+                
+            })
+            .catch((error) => {
+                alert(error)
+            })
+    }
 
     return (
         <div className="nav">
@@ -57,10 +66,7 @@ function Nav() {
                 </div>
             </form>
             <div className="profile">
-                <div className="profile-img">
-                    <img src={`${profile}`} alt="profile-pic" />
-                </div>
-                <button onClick={signOut}>Logout</button>
+                <button onClick={logOut}>Logout</button>
             </div>
         </div>
     )
